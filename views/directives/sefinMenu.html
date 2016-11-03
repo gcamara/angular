@@ -1,0 +1,11 @@
+<ul class="menu-item">
+    <!-- Criação dos menus e submenus -->
+    <li ng-repeat="menu in main.opcoesMenu" ng-class="{ active: menu.active }">
+        <span><button ng-click="main.ativarMenu(menu)"><i class="glyphicon" ng-class="menu.icon"></i> {{menu.nome}}</button></span>
+        <ul class='submenu' ng-class="{ 'active' : menu.active }">
+            <li ng-class="{ show: menu.active }" ng-repeat="submenu in menu.submenus">
+                <button ng-click="main.ativarMenu(submenu)">{{submenu.nome}}</button>
+            </li>
+        </ul>
+    </li>
+</ul>

@@ -1,0 +1,176 @@
+.topo {
+    background:
+            linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+            linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+            linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+            linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+            linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+            linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+    background-color: #131313;
+    background-size: 20px 20px;
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+.topo h2 {
+    transition: all .5s;
+}
+
+.topo h2.collapsed {
+    height: 30px;
+    margin: 0;
+}
+
+.topo img {
+    -webkit-transition: all .5s ease-in;
+    -moz-transition: all .5s ease-in;
+    -ms-transition: all .5s ease-in;
+    -o-transition: all .5s ease-in;
+    transition: all .5s ease-in ;
+    max-width: 200px;
+    max-height: 300px;
+}
+
+.topo img.collapsed {
+    max-width: 30px;
+    max-height: 30px;
+}
+
+.angular {
+    position: relative;
+    text-align: center;
+    color: white;
+    width: 200px;
+    opacity: 0;
+    transition: all .5s ease-in;
+}
+
+.angular.collapsed, .javascript.collapsed {
+    display: flex;
+    top: 5px;
+}
+
+.javascript {
+    position: relative;
+    width: 200px;
+    text-align: center;
+    color: white;
+    opacity: 0;
+}
+
+.angular, .javascript {
+    transition: transform .2s ease-in-out, left .4s ease-in, opacity .7s ease-in;
+}
+
+.angular:hover, .javascript:hover {
+    transform: scale(1.1);
+}
+
+.angular.animate, .javascript.animate, .linha.animate {
+    opacity: 1;
+}
+
+.topo-fixo {
+    height: 30px;
+    position: relative;
+    background: #3f3f3f;
+    width: 100%;
+}
+
+.linha {
+    position: relative;
+    height: 0px;
+    border: 1px solid white;
+    opacity: 0;
+    transition: all .5s ease-in-out;
+}
+
+.linha.animate {
+    height: 250px;
+}
+
+.linha.collapsed {
+    height: 60px;
+}
+
+.expand-jumb {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: white;
+    background: #3f3f3f;
+    text-align: center;
+    border-radius: 30px;
+    width: 20px;
+    height: 20px;
+    margin: 0 10px -10px 0;
+}
+
+
+
+@media only screen and (min-width: 768px) {
+    .angular {
+        left: 15%;
+    }
+
+    .angular.animate {
+        left: 10%;
+    }
+
+    .javascript {
+        left: 30%;
+    }
+
+    .javascript.animate {
+        left: 35%;
+    }
+
+    .linha {
+        left: 22%;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .angular {
+        left: 35%;
+    }
+
+    .angular.animate {
+        left: 32%;
+    }
+
+    .javascript {
+        left: 45%;
+    }
+
+    .javascript.animate {
+        left: 47%;
+    }
+
+    .linha {
+        left: 40%;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .angular {
+        left: 27%;
+    }
+
+    .angular.animate {
+        left: 25%;
+    }
+
+    .javascript {
+        left: 37%;
+    }
+
+    .javascript.animate {
+        left: 39%;
+    }
+
+    .linha {
+        left: 32%;
+    }
+}

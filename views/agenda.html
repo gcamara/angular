@@ -1,0 +1,65 @@
+<div class="row margem" ng-init="main.buscarContatos()">
+    <div class="col-md-3">
+        <div class="col-md-12">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input class="form-control" type="text" placeholder="Nome do Contato" ng-model="main.contatoCorrente.nome">
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                <input class="form-control" type="text" placeholder="(XX) X XXXX-XXXX" ng-model="main.contatoCorrente.telefone">
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <button class="btn btn-primary" ng-click="main.adicionarContato()">Adicionar</button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div ng-show="main.campos.length" class="alert alert-danger">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            Campo(s) obrigatório(s) {{ main.campos }}
+        </div>
+    </div>
+</div>
+    <div class="col-md-12 divisor">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                Meus Contatos
+                <div class="pull-right pesquisa">
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-disabled="!main.contatos.length" ng-model="main.filtro">
+                        <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="tabela-agenda">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nome</th>
+                        <th>Telefone</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="contato in main.contatos | filter: main.filtro | orderBy: '+nome'">
+                        <td>{{$index}}</td>
+                        <td>{{contato.nome}}</td>
+                        <td>{{contato.telefone}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

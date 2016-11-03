@@ -1,0 +1,256 @@
+<div ng-init="main.alterarMenu('Escopos')"></div>
+<style>
+    ui-ace {
+        display: block;
+        width: 100%;
+        height: 350px;
+    }
+
+    h3.topico {
+        background: #fff;
+        border-radius: 4px;
+        font-weight: bold;
+        color: #8c8c8c;
+        font-family: "Helvetica";
+        padding: 10px;
+    }
+
+    .row {
+        margin-bottom: 10px;
+    }
+
+    .show-scope-demo.ng-scope,
+    .show-scope-demo .ng-scope  {
+        border: 1px solid red;
+        margin: 3px;
+    }
+
+</style>
+
+<h3 class="topico">Escopos</h3>
+
+<ul>
+    <li>Usar $scope com data-model</li>
+    <li>Hierarquia de Escopos</li>
+    <li>Eventos</li>
+</ul>
+
+<h3 class="topico">Usar $scope como data-model</h3>
+
+<ul class="nav nav-tabs">
+    <li class="active"><button data-toggle="tab" href="#controller">controller.js</button></li>
+    <li><button data-toggle="tab" href="#pagina">index.html</button></li>
+    <li><button data-toggle="tab" href="#resultado">Resultado</button></li>
+</ul>
+
+<div class="tab-content">
+    <div id="controller" class="tab-pane fade in active">
+        <ui-ace id="editor" ui-ace="{
+            useWrapMode : true,
+            showGutter: true,
+            theme:'solarized_dark',
+            mode: 'javascript',
+            firstLineNumber: 0
+          }">
+<pre>//Função anônima auto-invocável (Self-invoking anonymous function)
+(function() {
+    'use strict';
+
+    //Reparar nos colchetes
+    var app = angular.module('app', []);
+
+    app.controller('MainController', ['$scope', MainController]);
+
+    function MainController($scope) {
+        $scope.oneWayBindMensagem = 'Mensagem que não será alterada';
+        $scope.twoWayBindMensagem = '';
+        $scope.oneTimeBindingMensagem = 'Olá, mundo!';
+    }
+})();</pre></ui-ace>
+    </div>
+
+    <div id="pagina" class="tab-pane fade">
+        <ui-ace id="editorHtml" ui-ace="{
+            useWrapMode : true,
+            showGutter: true,
+            theme:'solarized_dark',
+            mode: 'html',
+            firstLineNumber: 0
+          }">
+<pre>&lt;div class="row"&gt;
+    &lt;div class="col-md-1"&gt;One-Way:&lt;/div&gt;
+    &lt;div class="col-md-9"&gt;{{main.oneWayBindMensagem}}&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="row"&gt;
+    &lt;div class="col-md-1"&gt;Two-Way:&lt;/div&gt;
+    &lt;div class="col-md-4"&gt;&lt;input class="form-control" type="text" ng-model="main.twoWayBindMensagem"&gt;&lt;/div&gt;
+    &lt;div class="col-md-5"&gt;{{main.twoWayBindMensagem}}&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="row"&gt;
+    &lt;div class="col-md-1"&gt;One-Time: &lt;/div&gt;
+    &lt;div class="col-md-4"&gt;&lt;input type="text" class="form-control" ng-model="main.oneTimeBindingMensagem"&gt;&lt;/div&gt;
+    &lt;div class="col-md-5"&gt;{{::main.oneTimeBindingMensagem}}&lt;/div&gt;
+&lt;/div&gt;</pre></ui-ace>
+    </div>
+
+    <div id="resultado" class="tab-pane fade">
+        <div class="row">
+            <div class="col-md-1">One-Way:</div>
+            <div class="col-md-9">{{main.oneWayBindMensagem}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">Two-Way:</div>
+            <div class="col-md-4"><input class="form-control" type="text" ng-model="main.twoWayBindMensagem"></div>
+            <div class="col-md-5">{{main.twoWayBindMensagem}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">One-Time: </div>
+            <div class="col-md-4"><input type="text" class="form-control" ng-model="main.oneTimeBindingMensagem"></div>
+            <div class="col-md-5">{{::main.oneTimeBindingMensagem}}</div>
+        </div>
+    </div>
+</div>
+
+
+<h3 class="topico">Hierarquia de Escopos</h3>
+
+<ul>
+    <li>Todos tem acesso ao $rootScope</li>
+    <li>Semelhança com o DOM - Estrutura de árvore</li>
+</ul>
+
+<ul class="nav nav-tabs">
+    <li class="active"><button data-toggle="tab" href="#controller-hierarquia">controller.js</button></li>
+    <li><button data-toggle="tab" href="#pagina-hierarquia">index.html</button></li>
+    <li><button data-toggle="tab" href="#resultado-hierarquia">Resultado</button></li>
+</ul>
+
+<div class="tab-content">
+    <div id="controller-hierarquia" class="tab-pane fade in active">
+        <ui-ace ui-ace="{
+            useWrapMode : true,
+            showGutter: true,
+            theme:'solarized_dark',
+            mode: 'javascript',
+            firstLineNumber: 0
+          }">
+<pre>angular.module('scopeExample', [])
+.controller('GreetController', ['$scope', '$rootScope', function($scope, $rootScope) {
+  $scope.name = 'World';
+  $rootScope.department = 'Angular';
+}])
+.controller('ListController', ['$scope', function($scope) {
+  $scope.names = ['Igor', 'Misko', 'Vojta'];
+}]);</pre></ui-ace>
+    </div>
+
+    <div id="pagina-hierarquia" class="tab-pane fade in">
+        <ui-ace ui-ace="{
+            useWrapMode : true,
+            showGutter: true,
+            theme:'solarized_dark',
+            mode: 'html',
+            firstLineNumber: 0
+          }"><pre>&lt;div class="show-scope-demo"&gt;
+  &lt;div ng-controller="GreetController"&gt;
+    Hello {{name}}!
+  &lt;/div&gt;
+  &lt;div ng-controller="ListController"&gt;
+    &lt;ol&gt;
+      &lt;li ng-repeat="name in names"&gt;{{name}} from {{department}}&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre></ui-ace>
+    </div>
+
+    <div id="resultado-hierarquia" class="tab-pane fade in">
+        <div class="show-scope-demo">
+            <div class="ng-scope" ng-init="name = 'World'">
+                Hello {{name}}!
+            </div>
+            <div class="ng-scope">
+                <ol>
+                    <li ng-repeat="name in main.names">{{name}} from {{department}}</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3 class="topico">Eventos</h3>
+<ul>
+    <li>Função $on - Escuta o evento</li>
+    <li>Função $emit - Escopos acima</li>
+    <li>Função $broadcast - Escopos abaixo</li>
+</ul>
+
+<ul class="nav nav-tabs">
+    <li class="active"><button data-toggle="tab" href="#controller-eventos">controller.js</button></li>
+    <li><button data-toggle="tab" href="#pagina-eventos">index.html</button></li>
+    <li><button data-toggle="tab" href="#resultado-eventos">Resultado</button></li>
+</ul>
+
+<div class="tab-content">
+    <div id="controller-eventos" class="tab-pane fade in active">
+        <ui-ace ui-ace="{
+            useWrapMode : true,
+            showGutter: true,
+            theme:'solarized_dark',
+            mode: 'javascript',
+            firstLineNumber: 0
+          }">
+<pre>angular.module('eventExample', [])
+.controller('EventController', ['$scope', function($scope) {
+  $scope.count = 0;
+  $scope.$on('MyEvent', function() {
+    $scope.count++;
+  });
+}]);</pre></ui-ace>
+    </div>
+
+    <div id="pagina-eventos" class="tab-pane fade in">
+        <ui-ace ui-ace="{
+            useWrapMode : true,
+            showGutter: true,
+            theme:'solarized_dark',
+            mode: 'html',
+            firstLineNumber: 0
+          }"><pre>&lt;div ng-controller="EventController"&gt;
+  Root scope &lt;tt&gt;MyEvent&lt;/tt&gt; count: {{count}}
+  &lt;ul&gt;
+    &lt;li ng-repeat="i in [1]" ng-controller="EventController"&gt;
+      &lt;button ng-click="$emit('MyEvent')"&gt;$emit('MyEvent')&lt;/button&gt;
+      &lt;button ng-click="$broadcast('MyEvent')"&gt;$broadcast('MyEvent')&lt;/button&gt;
+      &lt;br&gt;
+      Middle scope &lt;tt&gt;MyEvent&lt;/tt&gt; count: {{count}}
+      &lt;ul&gt;
+        &lt;li ng-repeat="item in [1, 2]" ng-controller="EventController"&gt;
+          Leaf scope &lt;tt&gt;MyEvent&lt;/tt&gt; count: {{count}}
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+            </pre></ui-ace>
+    </div>
+
+    <div id="resultado-eventos" class="tab-pane fade in">
+        <div ng-controller="AngularController">
+            Root scope <tt>MyEvent</tt> count: {{count}}
+            <ul>
+                <li ng-repeat="i in [1]" ng-controller="AngularController">
+                    <button class="btn btn-primary" ng-click="$emit('MyEvent')">$emit('MyEvent')</button>
+                    <button class="btn btn-primary" ng-click="$broadcast('MyEvent')">$broadcast('MyEvent')</button>
+                    <br>
+                    Middle scope <tt>MyEvent</tt> count: {{count}}
+                    <ul>
+                        <li ng-repeat="item in [1, 2]" ng-controller="AngularController">
+                            Leaf scope <tt>MyEvent</tt> count: {{count}}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

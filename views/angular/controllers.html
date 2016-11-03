@@ -1,0 +1,101 @@
+<div ng-init="main.alterarMenu('Controllers')"></div>
+<style>
+    ui-ace {
+        display: block;
+        width: 100%;
+        height: 650px;
+    }
+
+    h3.topico {
+        background: #fff;
+        border-radius: 4px;
+        font-weight: bold;
+        color: #8c8c8c;
+        font-family: "Helvetica";
+        padding: 10px;
+    }
+</style>
+
+<h3 class="topico">Controllers</h3>
+<ul>
+    <li>Guarda a logica de negócio</li>
+    <li>Atribui comportamento ao objeto $scope</li>
+</ul>
+
+<ui-ace id="editor" ui-ace="{
+            useWrapMode : true,
+            showGutter: true,
+            theme:'solarized_dark',
+            mode: 'javascript',
+            firstLineNumber: 0
+}"><pre>(function() {
+    'use strict'
+
+    var app = angular.module('app');
+
+    //Injeta $scope e ContatoService
+    //ContatoService tem que estar criado anteriormente
+    app.controller('AgendaController', ['$scope', 'ContatoService', AgendaController]);
+
+    function AgendaController($scope, contatoService) {
+        //Recupera o escopo pai
+        var parent = $scope.$parent.main;
+        parent.menus = ['Home', 'Agenda', 'Cadastro'];
+
+        var vm = this;
+
+        vm.agenda = [];
+        vm.campos = [];
+        vm.contatos = [];
+        vm.contatoCorrente = new Contato();
+        vm.filtro = '';
+
+        vm.adicionarContato = function() {
+            if (verificarCampos()) {
+                vm.contatos.push(vm.contatoCorrente);
+                vm.contatoCorrente = new Contato();
+            }
+        }
+
+        function verificarCampos() {
+            vm.campos = [];
+
+            var campos = [{ campo: 'Nome', valor: vm.contatoCorrente.nome }, { campo: 'Telefone', valor: vm.contatoCorrente.telefone }];
+
+            campos.forEach(campo => {
+                if (!campo.valor && vm.campos.indexOf(campo.campo) == -1) {
+                vm.campos.push(campo.campo);
+            }
+        });
+
+            return vm.campos.length === 0;
+        }
+
+         vm.buscarContatos = buscarContatos(vm, contatoService);
+    }
+
+    function buscarContatos(controller, service) {
+        service
+            .buscarContatos()
+            .then(success, error);
+
+        function success(result) {
+            console.log(result);
+
+            if (result.data) {
+                result.data.forEach(function(contato) {
+                    var novoContato = new Contato();
+                    novoContato.nome = contato.nome;
+                    novoContato.telefone = contato.telefone;
+
+                    controller.contatos.push(novoContato);
+                })
+            }
+        }
+
+        function error(result) {
+            console.log(result);
+        }
+    }
+})();</pre></ui-ace>
+

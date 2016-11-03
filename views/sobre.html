@@ -1,0 +1,122 @@
+<style>
+    .img-sobre {
+        max-width: 120px;
+        max-height: 40px;
+        display: block;
+        /*margin: auto;*/
+    }
+
+    .prefeitura {
+        background-color: rgba(0,0,0,.5);
+        display: flex;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        font-family: "Helvetica";
+        color: #fff;
+        padding: 10px;
+        margin-top: 20px;
+        margin-left: -10px;
+    }
+
+    .objetivo {
+        /* width: 100%; */
+        height: 220px;
+        display: inline-flex;
+        position: relative;
+        margin: auto;
+        padding: 10px;
+        background: #D24D57;
+        border-radius: 120px;
+        /* border-top-left-radius: 120px; */
+        /* border-bottom-left-radius: 120px; */
+        color: #fff;
+    }
+
+    .imagem-objetivo {
+        background-image: url(imgs/objective.jpg);
+        background-size: 300px 170px;
+        width: 200px;
+        height: 200px;
+        border-radius: 450px;
+        background-repeat: no-repeat;
+        background-position: 50%;
+        background-color: #2f2f2f;
+        box-shadow: #F64747 0 0px 10px;
+    }
+
+    .sobre-wrapper p {
+        width: 500px;
+        padding-right: 20px;
+        text-align: justify;
+        margin: 50px 0 0 10px;
+        position: relative;
+    }
+
+    .sobre-wrapper{
+        width: 100%;
+        display: block;
+        height: 600px;
+    }
+
+    .informacoes {
+        /* width: 100%; */
+        height: 220px;
+        display: inline-flex;
+        position: relative;
+        margin-top: 50px;
+        padding: 10px;
+        position: relative;
+        float: right;
+        background: #F4D03F;
+        border-radius: 120px;
+        /* border-top-left-radius: 120px; */
+        /* border-bottom-left-radius: 120px; */
+        color: #fff;
+    }
+
+    .imagem-contato {
+        background-image: url(imgs/informacoes.png);
+        background-size: contain;
+        width: 200px;
+        height: 200px;
+        border-radius: 450px;
+        position: relative;
+        float: right;
+        background-repeat: no-repeat;
+        background-position: 50%;
+        background-color: #2f2f2f;
+        box-shadow: #F5D76E 0 0px 10px;
+    }
+
+    .informacoes p {
+        position: relative;
+        float: left;
+    }
+</style>
+
+<div ng-init="main.alterarMenu('Escopos')">
+</div>
+
+<div class="sobre-wrapper">
+    <div class="objetivo">
+        <div class="imagem-objetivo"></div>
+        <p>
+            Fazer uma overview sobre Javascript, falar um pouco sobre funções, objetos, JSON, protótipos,
+            um pouco de boas práticas. No mais, tentar passar o pouco conhecimento sobre essa linguagem foda que
+            tem ganhado muito espaço de uns anos pra cá.
+        </p>
+    </div>
+
+    <div class="informacoes">
+        <p>
+            Tem muita novidade nos desenvolvimentos web. Algumas linguagens estão ficando ultrapassadas, porque não
+            houveram atualizações, ou porque as tecnologias saíram do gosto da comunidade dev. O fato é que estamos
+            diante de uma revolução tecnológica.
+        </p>
+        <div class="imagem-contato"></div>
+    </div>
+</div>
+<div class="prefeitura">
+    <img class="img-sobre" src="imgs/prefeitura.png">
+</div>

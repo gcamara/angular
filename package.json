@@ -1,0 +1,10 @@
+{
+  "name"         : "SO",
+  "version"      : "0.0.0",
+  "description"  : "Trabalho de Sistemas Operacionais",
+  "main"         : "server.js",
+  "author"       : "Scotch",
+  "dependencies" : {
+    "express"    : "~4.7.2"
+  }
+}

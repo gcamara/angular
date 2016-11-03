@@ -1,0 +1,48 @@
+<div ng-init="main.alterarMenu('Objetos Literais')"></div>
+<style>
+    #editor {
+        display: block;
+        width: 100%;
+        height: 200px;
+    }
+
+    h3.topico {
+        background: #fff;
+        border-radius: 4px;
+        font-weight: bold;
+        color: #8c8c8c;
+        font-family: "Helvetica";
+        padding: 10px;
+    }
+</style>
+
+<h3 class="topico">Declaração de Objeto Literal</h3>
+
+<ul>
+    <li>Declaração com {}</li>
+    <li>Atributos dinâmicos</li>
+    <li>Herda diretamente de Object</li>
+</ul>
+
+<ui-ace id="editor" ui-ace="{
+            useWrapMode : true,
+            showGutter: true,
+            theme:'solarized_dark',
+            mode: 'javascript',
+            firstLineNumber: 0
+          }">//Função anônima auto-invocável (Self-invoking anonymous function)
+(function() {
+    'use strict';
+
+    //Objeto literal
+    var curso = {
+       nome: 'AngularJS',
+       local: 'Secretaria de Finanças - Auditorio',
+       data: new Date()
+    };
+
+    curso.duracao = "01:30";
+
+})();
+</ui-ace>
+

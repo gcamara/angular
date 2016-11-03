@@ -1,0 +1,67 @@
+[
+  {
+    "nome": "Javascript",
+    "icon": "ic-js",
+    "active": true,
+    "submenus": [
+        {
+         "nome": "Objetos Literais",
+          "link": "/js/objetosLiterais"
+      },
+      {
+        "nome": "JSON",
+        "link": "/js/JSON"
+      },
+        {
+        "nome": "Funções",
+        "link": "/js/funcoes"
+        },
+        {
+          "nome": "Protótipos",
+          "link": "/js/prototipos"
+        }]
+  },
+  {
+    "nome": "AngularJS",
+    "icon": "ic-angular",
+    "active": true,
+    "submenus": [
+      {
+        "nome": "Escopos",
+        "link": "/angular/escopos"
+      },
+      {
+        "nome": "Módulos",
+        "link": "/angular/modulos"
+      },
+      {
+        "nome": "Diretivas",
+        "link": "/angular/diretivas"
+      },
+      {
+        "nome": "Controladores",
+        "link": "/angular/controllers"
+      },
+      {
+        "nome": "Serviços",
+        "link": "/angular/servicos"
+      },
+      {
+        "nome": "Promessas",
+        "link": "/angular/promessas"
+    }]
+  },
+  {
+    "nome": "Agenda",
+    "link": "/agenda",
+    "icon": "glyphicon-th-list",
+    "active": false
+  },
+  {
+    "nome": "Sobre",
+    "link": "/sobre",
+    "icon": "glyphicon-question-sign",
+    "active": false,
+    "submenus": []
+  }
+]

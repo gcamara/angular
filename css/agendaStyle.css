@@ -1,0 +1,5 @@
+.tabela-agenda {
+    max-height: 600px;
+    overflow: auto;
+    width: 100%;
+}

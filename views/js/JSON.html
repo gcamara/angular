@@ -1,0 +1,103 @@
+<div ng-init="main.alterarMenu('JSON')"></div>
+<style>
+    #editor-json {
+        display: block;
+        width: 100%;
+        height: 600px;
+    }
+
+    h3.topico {
+        background: #fff;
+        border-radius: 4px;
+        font-weight: bold;
+        color: #8c8c8c;
+        font-family: "Helvetica";
+        padding: 10px;
+    }
+</style>
+
+<h3 class="topico">Declaração de JSON</h3>
+
+<ul>
+    <li>Declaração com {}</li>
+    <li>Chaves e valores com ""</li>
+    <li>Não é um objeto Javascript</li>
+    <li>Declarativo como XML</li>
+</ul>
+
+<ui-ace id="editor-json" ui-ace="{
+            useWrapMode : true,
+            showGutter: true,
+            theme:'solarized_dark',
+            mode: 'json',
+            firstLineNumber: 0
+          }">[
+  {
+    "nome": "Javascript",
+    "icon": "ic-js",
+    "active": true,
+    "submenus": [
+        {
+         "nome": "Objetos Literais",
+          "link": "/js/objetosLiterais"
+      },
+      {
+        "nome": "JSON",
+        "link": "/js/JSON"
+      },
+        {
+        "nome": "Funções"
+        },
+        {
+          "nome": "Protótipos"
+        }]
+  },
+  {
+    "nome": "AngularJS",
+    "icon": "ic-angular",
+    "active": true,
+    "submenus": [
+      {
+        "nome": "Escopos"
+      },
+      {
+        "nome": "Módulos"
+      },
+      {
+        "nome": "Diretivas"
+      },
+      {
+        "nome": "Controladores"
+      },
+      {
+        "nome": "Serviços"
+      },
+      {
+        "nome": "Promessas"
+    }]
+  },
+  {
+    "nome": "Agenda",
+    "link": "",
+    "icon": "glyphicon-th-list",
+    "active": true,
+    "submenus": [
+      {
+        "nome": "Cadastro",
+        "link": "/agenda"
+      },
+      {
+        "nome": "Listar Contatos"
+      }
+    ]
+  },
+  {
+    "nome": "Sobre",
+    "link": "/sobre",
+    "icon": "glyphicon-question-sign",
+    "active": true,
+    "submenus": []
+  }
+]
+</ui-ace>
+

@@ -1,0 +1,54 @@
+<div ng-init="main.alterarMenu('Protótipos')"></div>
+<style>
+    #editor {
+        display: block;
+        width: 100%;
+        height: 300px;
+    }
+
+    h3.topico {
+        background: #fff;
+        border-radius: 4px;
+        font-weight: bold;
+        color: #8c8c8c;
+        font-family: "Helvetica";
+        padding: 10px;
+    }
+</style>
+
+<h3 class="topico">Conhecendo o Prototype</h3>
+
+<ul>
+    <li>Conceito de herança</li>
+    <li>Carregado em memória (Performance)</li>
+    <li>Pouco legível</li>
+</ul>
+
+<ui-ace id="editor" ui-ace="{
+            useWrapMode : true,
+            showGutter: true,
+            theme:'solarized_dark',
+            mode: 'javascript',
+            firstLineNumber: 0
+          }">
+function Pessoa(nome, telefone) {
+    this.nome = nome;
+    this.telefone = telefone;
+}
+
+var gabs = new Pessoa('Gabriel', '8599999-9999');
+console.log(gabs instanceof Pessoa ? 'É Pessoa' : 'Não é pessoa');
+
+Pessoa.prototype = {
+    constructor: Pessoa,
+    imprimir: function() {
+        console.log(this.nome+" - "+this.telefone);
+    }
+}
+</ui-ace>
+
+
+<div class="note note-danger">
+    <h4>Má prática</h4>
+    <p>É uma má prática sobrescrever os prototipos do javascript, o ideal é criar seus proprios prototypes.</p>
+</div>

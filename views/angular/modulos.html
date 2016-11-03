@@ -1,0 +1,112 @@
+<div ng-init="main.alterarMenu('Módulos')"></div>
+<style>
+    ui-ace {
+        display: block;
+        width: 100%;
+        height: 350px;
+    }
+
+    .secao-1 {
+        height: 200px;
+    }
+
+    h3.topico {
+        background: #fff;
+        border-radius: 4px;
+        font-weight: bold;
+        color: #8c8c8c;
+        font-family: "Helvetica";
+        padding: 10px;
+    }
+</style>
+
+<h3 class="topico">Módulos</h3>
+<ul>
+    <li>Segregação do código</li>
+    <li>Fácil reutilização</li>
+    <li>Independencia de codigo</li>
+    <li>Separar diretivas, serviços, controllers</li>
+</ul>
+
+<h3 class="topico">Criar módulos vs. Chamar módulo</h3>
+
+<ui-ace ui-ace="{
+            useWrapMode : true,
+            showGutter: true,
+            theme:'solarized_dark',
+            mode: 'javascript',
+            firstLineNumber: 0
+          }"
+        class="secao-1"
+>
+<pre>(function() {
+    'use strict';
+
+    //Cria o módulo 'app' sem nenhuma dependência.
+    var app = angular.module('app', []);
+
+    //Recupera módulo 'app' - CDI (Controle de Inversão)
+    app = angular.module('app');
+})();</pre></ui-ace>
+
+
+<h3 class="topico">Dividir para conquistar</h3>
+<ul>
+    <li>Criar o módulo "modulo"</li>
+    <li>Criar um Controller</li>
+    <li>Reutilizar o Controller</li>
+</ul>
+
+<ul class="nav nav-tabs">
+    <li class="active"><button data-toggle="tab" href="#controller">controller.js</button></li>
+    <li><button data-toggle="tab" href="#pagina">index.html</button></li>
+    <li><button data-toggle="tab" href="#resultado">Resultado</button></li>
+</ul>
+
+<div class="tab-content">
+    <div id="controller" class="tab-pane active fade in">
+        <ui-ace id="editor" ui-ace="{
+            useWrapMode : true,
+            showGutter: true,
+            theme:'solarized_dark',
+            mode: 'javascript',
+            firstLineNumber: 0
+          }">
+<pre>//Função anônima auto-invocável (Self-invoking anonymous function)
+(function() {
+    'use strict';
+
+	var modulo = angular.module('modulo', []);
+
+	modulo.controller('ModuloController', ModuloController);
+
+	function ModuloController() {
+		var vm = this;
+		this.saudacao = "Olá, Mundo!";
+	}
+
+	var app = angular.module('app', ['ngRoute', 'ui.ace', 'modulo']);
+})();</pre></ui-ace>
+    </div>
+
+    <div id="pagina" class="tab-pane fade in">
+        <ui-ace id="editorHtml" ui-ace="{
+            useWrapMode : true,
+            showGutter: true,
+            theme:'solarized_dark',
+            mode: 'html',
+            firstLineNumber: 0
+          }">
+<pre>
+&lt;div ng-controller="ModuloController as main"&gt;
+  Essa é a saudação do ModuloController: {{::main.saudacao}}
+&lt;/div&gt;
+</pre></ui-ace>
+    </div>
+
+    <div id="resultado" class="tab-pane fade in">
+        <div ng-controller="ModuloController as main">
+            Essa é a saudação do ModuloController: {{::main.saudacao}}
+        </div>
+    </div>
+</div>

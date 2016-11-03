@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<base href="/angular/">
+<meta charset="utf-8">
+<head lang="en">
+	<title>Sefin :: JS e AngularJS</title>
+
+    <!-- ACE -->
+    <script src="js/ace/ace.js"></script>
+    <script src="js/ace/mode-javascript.js"></script>
+    <script src="js/ace/mode-json.js"></script>
+    <script src="js/ace/worker-javascript.js"></script>
+    <script src="js/ace/theme-idle_fingers.js"></script>
+    <script src="js/ace/theme-solarized_dark.js"></script>
+    <script src="js/ace/mode-html.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- Scripts do Angular -->
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
+
+    <!--  Configurações Iniciais -->
+    <script src="js/classes.js"></script>
+	<script src="js/main.js"></script>
+    <script src="js/config.js"></script>
+
+    <!-- Diretivas -->
+    <script src="js/directives/sefinMenu.js"></script>
+    <script src="js/directives/ace-ui.js"></script>
+    <script src="js/directives/imagemTopo.js"></script>
+
+    <!-- Services -->
+    <script src="js/services/menuService.js"></script>
+    <script src="js/services/contatoService.js"></script>
+    <script src="js/services/angularService.js"></script>
+
+    <!-- Controllers -->
+    <script src="js/controllers/agendaController.js"></script>
+    <script src="js/controllers/jsController.js"></script>
+    <script src="js/controllers/angularController.js"></script>
+    <script src="js/controllers/sobreController.js"></script>
+
+    <!-- CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/topo.css">
+    <link rel="stylesheet" href="css/agendaStyle.css">
+    <link rel="stylesheet" href="css/bootstrap-customizado.css">
+
+</head>
+
+<body ng-controller="MainController as main">
+	<div class="sidenav" ng-class=" { 'collapse-side': main.menuCollapsed }">
+        <div class="menus" ng-class="{ 'menus-hide': main.menuCollapsed }">
+            <div class="photo-wrapper">
+                <div class="usuario-card">
+                    <div class="photo"></div>
+                    <p class="photo-label">Secretaria das Finanças</p>
+                </div>
+            </div>
+
+            <!-- Diretiva do Menu -->
+            <sefin-menu></sefin-menu>
+        </div>
+	</div>
+    <!-- TOPO -->
+	<div class="wrapper" ng-class="{'collapsed-content': main.menuCollapsed }">
+        <div class="topo-fixo">
+            <div class="menu-icon" ng-click="main.exibeMenu()"></div>
+        </div>
+		<div class="jumbotron topo">
+            <imagem-topo class="angular" imagem="imgs/angular-icon.png"
+                         titulo="AngularJS" tipo="angular"
+                         controller="main">
+            </imagem-topo>
+            <div class="linha" ng-init="main.load('linha')" ng-class="{'collapsed': main.collapseJumb}"></div>
+            <imagem-topo class="javascript" imagem="imgs/JS.png"
+                         titulo="Javascript" tipo="javascript"
+                         controller="main">
+            </imagem-topo>
+
+            <div class="expand-jumb" ng-click="main.collapseJumb = !main.collapseJumb">
+                <i class="glyphicon" ng-class="{ 'glyphicon-chevron-down' : main.collapseJumb, 'glyphicon-chevron-up': !main.collapseJumb }"></i>
+            </div>
+        </div>
+
+
+        <!-- Conteúdo da Pagina na diretiva ngView -->
+        <div class="conteudo">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item" ng-class="{ 'active': $index == main.menus.length-1 }" ng-repeat="menu in main.menus">
+                    <a ng-if="$index < main.menus.length-1" href="#">{{menu}}</a>
+                    <h7 ng-if="$index == main.menus.length-1">{{menu}}</h7>
+                </li>
+            </ol>
+
+            <div ng-view ng-init="main.ativarMenu({link: '/sobre'})"></div>
+        </div>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<div ng-init="main.alterarMenu('Funções')"></div>
+<style>
+    ui-ace {
+        display: block;
+        width: 100%;
+        min-height: 60px;
+    }
+
+    ui-ace.tipos-funcoes {
+        height: 400px;
+    }
+
+    h3.topico {
+        background: #fff;
+        border-radius: 4px;
+        font-weight: bold;
+        color: #8c8c8c;
+        font-family: "Helvetica";
+        padding: 10px;
+    }
+</style>
+
+<h3 class="topico">Funções</h3>
+
+<ul>
+    <li>Escopos específicos</li>
+    <li>Não possuem tipagem</li>
+    <li>Pode receber outra função como parâmetro</li>
+    <li>Pode possuir outras funções internas</li>
+    <li>Hoisting</li>
+</ul>
+
+<ui-ace ui-ace="{
+            useWrapMode : true,
+            showGutter: true,
+            theme:'solarized_dark',
+            mode: 'javascript',
+            firstLineNumber: 0
+          }">function olaMundo() {
+     return "Hello, World!";
+}</ui-ace>
+
+
+<h3 class="topico">Tipos de Funções</h3>
+
+<ul>
+    <li>Funções Expressões</li>
+    <li>Funções anônimas</li>
+    <li>Funções declarativas</li>
+    <li>Funções Auto-invocáveis</li>
+</ul>
+
+<ui-ace class="tipos-funcoes" ui-ace="{
+            useWrapMode : true,
+            showGutter: true,
+            theme:'solarized_dark',
+            mode: 'javascript',
+            firstLineNumber: 0
+          }">//Pode ou não possuir um nome e é atribuída a uma expressão
+var funcaoExpressao = function() {
+  return "Olá, Mundo!";
+};
+
+//Função Declarativa
+function olaMundo() {
+    console.log("Olá, Mundo!");
+}
+
+//
+function chamarCallback(callback) {
+    //Shorthand expression
+    callback && callback();
+}
+
+chamarCallback(
+    //Função Anônima, Interna
+    function() {
+        console.log("Mensagem");
+    }
+);
+
+chamarCallback(olaMundo);
+
+//Nao passar nada como parâmetro
+chamarCallback();
+
+
+//Função Auto-Invocável
+(function() {
+    console.log("Olá, Mundo!");
+})();
+</ui-ace>
+
+<h3 class="topico">Hoisting</h3>
+
+<ul>
+    <li>Ordem de processamento das funções</li>
+    <li>Funções e variáveis são interpretadas primeiro</li>
+    <li>Em caso de Função Expressão, só a variável é interpretada e a função só será reconhecida por codigos que venham depois dela</li>
+</ul>
+
+<ui-ace class="tipos-funcoes" ui-ace="{
+            useWrapMode : true,
+            showGutter: true,
+            theme:'solarized_dark',
+            mode: 'javascript',
+            firstLineNumber: 0
+          }">//Retirado do site https://javascriptweblog.wordpress.com/2010/07/06/function-declarations-vs-function-expressions/
+
+/*
+* Primeiro caso:
+* Vai retornar 8, pois as funções serão interpretadas primeiro
+*/
+function foo(){
+    function bar() {
+        return 3;
+    }
+    return bar();
+    function bar() {
+        return 8;
+    }
+}
+alert(foo());
+
+
+/*
+* Segundo caso:
+* Vai retornar 3. No caso de funções expressões, elas só são interpretadas quando são atingidas.
+*/
+function foo(){
+    var bar = function() {
+        return 3;
+    };
+    return bar();
+    var bar = function() {
+        return 8;
+    };
+}
+alert(foo());
+
+
+/*
+*  Terceiro Caso:
+* Mesmo caso acima, porém a função alert() é chamada antes da função foo();
+* Não ocorrerá problema, por causa do hoisting, ou seja, as funções e tudo o que houver dentro delas
+* serão interpretados primeiro;
+*/
+alert(foo());
+function foo(){
+    var bar = function() {
+        return 3;
+    };
+    return bar();
+    var bar = function() {
+        return 8;
+    };
+}
+
+/*
+* Quarto caso:
+* Ocorrerá um erro, por que as funções são expressivas e, nesse caso, não ocorre hoisting.
+*/
+function foo(){
+    return bar();
+    var bar = function() {
+        return 3;
+    };
+    var bar = function() {
+        return 8;
+    };
+}
+alert(foo());
+
+</ui-ace>
